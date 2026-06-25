@@ -18,12 +18,12 @@ try {
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const SEED_COLORS = [
-  { name: 'Gold', slug: 'gold' },
-  { name: 'Silver', slug: 'silver' },
-  { name: 'Pearl White', slug: 'pearl-white' },
-  { name: 'Silver-Gold', slug: 'silver-gold' },
-  { name: 'Turquoise Blue', slug: 'turquoise-blue' },
-  { name: 'Platinum', slug: 'platinum' }
+  { name: 'Gold', slug: 'gold', color_code: '#E5A93B' },
+  { name: 'Silver', slug: 'silver', color_code: '#C0C0C0' },
+  { name: 'Pearl White', slug: 'pearl-white', color_code: '#FDFDFD' },
+  { name: 'Silver-Gold', slug: 'silver-gold', color_code: '#D4AF37' },
+  { name: 'Turquoise Blue', slug: 'turquoise-blue', color_code: '#40E0D0' },
+  { name: 'Platinum', slug: 'platinum', color_code: '#E5E4E2' }
 ];
 
 const SEED_SIZES = [

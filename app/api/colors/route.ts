@@ -23,7 +23,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { id, name, slug } = body;
+    const { id, name, slug, color_code } = body;
 
     if (!name || !slug) {
       return NextResponse.json({ message: 'Name and slug are required' }, { status: 400 });
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
       // Update
       const { data, error } = await supabase
         .from('colors')
-        .update({ name, slug })
+        .update({ name, slug, color_code })
         .eq('id', id)
         .select()
         .single();
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
       // Create
       const { data, error } = await supabase
         .from('colors')
-        .insert([{ name, slug }])
+        .insert([{ name, slug, color_code }])
         .select()
         .single();
 

@@ -6,7 +6,7 @@ import { supabase } from '../../../../lib/supabase';
 const registerSchema = z.object({
   email: z.string().email('Email không hợp lệ'),
   password: z.string().min(6, 'Mật khẩu phải từ 6 ký tự trở lên'),
-  full_name: z.string().min(1, 'Họ tên không được để trống'),
+  full_name: z.string().optional(),
 });
 
 export async function POST(request: Request) {
@@ -23,6 +23,7 @@ export async function POST(request: Request) {
     }
 
     const { email, password, full_name } = validation.data;
+    const finalFullName = full_name || email.split('@')[0];
 
     // Check if user already exists in Supabase
     const { data: userExist, error: existError } = await supabase
@@ -49,7 +50,7 @@ export async function POST(request: Request) {
     const { data: newUser, error: insertError } = await supabase
       .from('users')
       .insert([
-        { email, password, full_name, role: 'user' }
+        { email, password, full_name: finalFullName, role: 'user' }
       ])
       .select('id, email, full_name, role')
       .single();
