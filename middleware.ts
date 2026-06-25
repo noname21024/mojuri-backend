@@ -2,11 +2,10 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const origin = request.headers.get('origin') || 'http://localhost:5173';
-  const allowedOrigins = ['http://localhost:5173', 'http://127.0.0.1:5173'];
+  const origin = request.headers.get('origin');
   
   const headers = new Headers();
-  if (allowedOrigins.includes(origin)) {
+  if (origin) {
     headers.set('Access-Control-Allow-Origin', origin);
   } else {
     headers.set('Access-Control-Allow-Origin', '*');
